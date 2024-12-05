@@ -1,10 +1,25 @@
 const gamesList = require("../data/videogames");
 
 const index = (req, res) => {
-    res.json({
-        data: gamesList,
-        count: gamesList.length
-    });
+    console.log(req.query.platform);
+    const query = req.query.platform;
+
+    if(query === undefined){
+        res.json({
+            data: gamesList,
+            count: gamesList.length
+        });
+    }else{
+        const result = gamesList.filter((curGame) => curGame.platform.includes(query))
+        console.log(result);
+        res.json({
+            data: result,
+            count: result.length
+        })
+    }
+   
+    
+  
 }
 
 const show = (req, res) => {
